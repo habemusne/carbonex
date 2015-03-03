@@ -1,12 +1,12 @@
 var express = require('express');
 
 var app = express();
-var courses = require('./www/routes/courses')
+var courses = require(__dirname + '/www/routes/courses')
 
 app.set('views', './www/templates');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
-app.use(express.static('./www/'));
+app.use(express.static(__dirname + '/www/'));
 //app.set('view engine', 'jade');
 
 //Routes
