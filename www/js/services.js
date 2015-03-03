@@ -8,7 +8,7 @@ angular.module('ionic-http-auth.services', ['http-auth-interceptor'])
       $http({
         //url: "http://54.67.92.221/blog/my-login.php",
         //url:"https://www.eventbrite.com/login/"
-        url:'/api/getCourses',
+        url:'/api/getcourses',
         method:   "GET",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         transformRequest: function(obj) {
