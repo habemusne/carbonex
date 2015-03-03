@@ -1,0 +1,23 @@
+/* Empty. Add your own CSS if you like */
+<style>
+table, th , td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table {
+   width:100%;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}     
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+td{
+   width:12%;
+   min-height:7%;
+   padding:1%;
+}
+</style>
