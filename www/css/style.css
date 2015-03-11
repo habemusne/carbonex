@@ -1,7 +1,5 @@
 /* Empty. Add your own CSS if you like */
-<style>
 table, th , td {
-  border: 1px solid black;
   border-collapse: collapse;
   padding: 5px;
 }
@@ -20,4 +18,23 @@ td{
    min-height:7%;
    padding:1%;
 }
-</style>
+
+.tablediv-container {
+	display: table;
+	position: absolute;
+	width:100%;
+	min-height:563px;
+}
+
+.tablediv-row  {
+	display: table-row;
+}
+
+#tablediv-time, #tablediv-mon, #tablediv-tue,
+#tablediv-wed, #tablediv-thu,#tablediv-fri,
+#tablediv-sat, #tablediv-sun {
+	width:12%;
+	display: table-cell;
+}
+
+

@@ -15,7 +15,7 @@ angular.module('ionic-http-auth.controllers', [])
     $scope.loginModal.remove();
   });
 })
-  
+
 .controller('LoginCtrl', function($scope, $http, $state, AuthenticationService) {
   $scope.message = "";
   
@@ -86,3 +86,5 @@ angular.module('ionic-http-auth.controllers', [])
 .controller('LogoutCtrl', function($scope, AuthenticationService) {
     AuthenticationService.logout();
 })
+
+

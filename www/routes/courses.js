@@ -12,7 +12,7 @@ var coursesData =
             "-class": "LE",
             "Section": "A00",
             "Days": "MW",
-            "Time": "5:00p-6:20p",
+            "Time": "17:00-18:20",
             "BuildingRoom": "CENTR_115",
             "Instructor": "Staff"
           },
@@ -20,14 +20,14 @@ var coursesData =
             "-class": "DI",
             "Section": "A01",
             "Days": "W",
-            "Time": "2:00p-2:50p",
+            "Time": "14:00-14:50",
             "BuildingRoom": "PCYNH_109"
           },
           {
             "-class": "FI",
             "Section": "06/06/2015",
             "Days": "S",
-            "Time": "8:00a-10:59a",
+            "Time": "8:00-10:59",
             "BuildingRoom": "TBA_TBA"
           }
         ]
@@ -42,7 +42,7 @@ var coursesData =
             "-class": "LE",
             "Section": "A00",
             "Days": "MWF",
-            "Time": "1:00p-1:50p",
+            "Time": "13:00-13:50",
             "BuildingRoom": "LEDDN_AUD",
             "Instructor": "Zhou, Shenggao"
           },
@@ -50,14 +50,14 @@ var coursesData =
             "-class": "DI",
             "Section": "A01",
             "Days": "Th",
-            "Time": "10:00a-10:50a",
+            "Time": "10:00-10:50",
             "BuildingRoom": "APM_2301"
           },
           {
             "-class": "FI",
             "Section": "06/11/2015",
             "Days": "Th",
-            "Time": "11:30a-2:29p",
+            "Time": "11:30-14:29",
             "BuildingRoom": "TBA_TBA"
           }
         ]
