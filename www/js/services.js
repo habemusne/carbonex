@@ -123,6 +123,8 @@ angular.module('ionic-http-auth.services', ['http-auth-interceptor'])
           height = frameEndY - frameStartY;
 
           div = document.createElement('DIV');
+          div.style.minHeight = height;
+          div.style.marginTop = frameStartY;
           text = document.createTextNode(schedule[i][j]["courseNumber"]); 
           div.appendChild(text);
           DayElements[i].appendChild(div);
