@@ -8,8 +8,8 @@ angular.module('ionic-http-auth.services', ['http-auth-interceptor'])
       $http({
         //url: "http://54.67.92.221/blog/my-login.php",
         //url:"https://www.eventbrite.com/login/"
-        url:'/api/getcourses',
-        method:   "GET",
+        url:'/api/login',
+        method:   "POST",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         transformRequest: function(obj) {
           var str = [];
@@ -18,7 +18,7 @@ angular.module('ionic-http-auth.services', ['http-auth-interceptor'])
           return str.join("&");
         },
         //params: {'username': user.username},
-        //data: {'username':user.username,'password':user.password,'submit':'yes'}
+        data: {'username':user.username,'password':user.password,'submit':'yes'}
       })
       .success(function (data, status, headers, config) {
         console.log("Login Success: data "+ data + "status: " + status);

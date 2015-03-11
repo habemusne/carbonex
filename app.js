@@ -1,7 +1,8 @@
 var express = require('express');
 
 var app = express();
-var courses = require(__dirname + '/www/routes/courses')
+var courses = require(__dirname + '/www/routes/courses');
+var users = require(__dirname + '/www/routes/users');
 
 app.set('views', './www/templates');
 app.engine('html', require('ejs').renderFile);
@@ -17,5 +18,6 @@ app.get('/', function(req, res) {
 });
 
 app.get('/api/getcourses', courses.getCourses);
+app.post('/api/login', users.userValidate);
 
 app.listen(process.env.PORT || 3000);
