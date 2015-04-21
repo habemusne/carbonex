@@ -15,9 +15,10 @@ var userData =
 }
 
 exports.userValidate = function (req, res){
-  console.log(req);
+
   username = req.body.username;
   password = req.body.password;
+
 
   for (i = 0; i < userData["users"].length; ++i){
     block = userData["users"][i]

@@ -23,7 +23,7 @@ angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.servic
   var customers = [{name: 'John Smith'}, {name: 'Tim Johnson'}];
   var week = [{name:'Monday'},{name:'Tuesday'},{name:'Wednesday'},{name:'Thursday'},{name:'Friday'},{name:'Saturday'},{name:'Sunday'}];
 
-
+  $rootScope.authorized = false;
 
    //Default prompt to login
   // returns the current list of customers or a 401 depending on authorization flag
@@ -43,6 +43,8 @@ angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.servic
 
   // All other http requests will pass through
   $httpBackend.whenGET(/.*/).passThrough();
+  $httpBackend.whenPOST(/.*/).passThrough();
+
 
   //$scope.$broadcast(‘event:auth-loginRequired’);
 
@@ -69,14 +71,23 @@ angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.servic
 	      }
 	  }      	  
     })
-    .state('app.customers', {
-      url: "/customers",
+    .state('app.courses', {
+      url: "/courses",
 	  views: {
 	      'menuContent' :{
-	          controller:  "CustomerCtrl",
-	          templateUrl: "templates/customers.html"            	
+	          controller:  "CourseCtrl",
+	          templateUrl: "templates/courses.html"            	
 	      }
 	  }      	  
+    })
+    .state('app.addcourse', {
+      url: "/addcourse",
+    views: {
+        'menuContent' :{
+            controller:  "AddCourseCtrl",
+            templateUrl: "templates/addcourse.html"             
+        }
+    }         
     })
     .state('app.logout', {
       url: "/logout",
