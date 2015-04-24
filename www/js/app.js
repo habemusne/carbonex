@@ -19,12 +19,15 @@ angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.servic
   });
   
   // Mocking code used for simulation purposes (using ngMockE2E module)	
-  var authorized = false;
   var customers = [{name: 'John Smith'}, {name: 'Tim Johnson'}];
   var week = [{name:'Monday'},{name:'Tuesday'},{name:'Wednesday'},{name:'Thursday'},{name:'Friday'},{name:'Saturday'},{name:'Sunday'}];
 
   $rootScope.authorized = false;
-
+  $rootScope.user = {
+    username: null,
+    password: null
+  };
+  $rootScope.courses =[];
    //Default prompt to login
   // returns the current list of customers or a 401 depending on authorization flag
   $httpBackend.whenGET('https://customers').respond(function (method, url, data, headers) {
