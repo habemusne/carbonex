@@ -20,5 +20,8 @@
   "cordovaPlugins": [
     "org.apache.cordova.device",
     "com.ionic.keyboard"
+  ],
+  "cordovaPlatforms": [
+    "android"
   ]
 }
