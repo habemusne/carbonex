@@ -93,13 +93,15 @@ angular.module('ionic-http-auth.controllers', [])
           if (parseInt(meetingA["time"].substring(0, 2))
             < parseInt(meetingB["time"].substring(0, 2))) {
             return -1;
-        } else if (parseInt(meetingA["time"].substring(0, 2))
+          } 
+          else if (parseInt(meetingA["time"].substring(0, 2))
           > parseInt(meetingB["time"].substring(0, 2))) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
+            return 1;
+          } 
+          else {
+            return 0;
+          }
+        });
       }
 
       DayElements = [];
