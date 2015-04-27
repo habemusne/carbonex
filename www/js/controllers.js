@@ -50,6 +50,16 @@ angular.module('ionic-http-auth.controllers', [])
       day2ScheduleIndex['F'] = 4;
       day2ScheduleIndex['Sa'] = 5;
       day2ScheduleIndex['Su'] = 6;
+
+      colorarray = [['#F1C40F', '#F39C12'],
+                    ['#E67E22', '#D35400'],
+                    ['#E74C3C', '#C0392B'],
+                    ['#1ABC9C', '#16A085'],
+                    ['#95A5A6', '#7F8C8D'],
+                    ['#2ECC71', '#27AE60'],
+                    ['#34495E', '#2C3E50']];
+
+      color_idx = 0;
       for (i = 0; i < courseList.length; ++i){
         lecture_days = courseList[i]['lecture_day'].split(',');
         for (j = 0; j < lecture_days.length; ++j){
@@ -59,6 +69,7 @@ angular.module('ionic-http-auth.controllers', [])
           meeting['time'] = courseList[i]['lecture_time'];
           meeting['room'] = courseList[i]['lecture_room'];
           meeting['courseName'] = courseList[i]['name'];
+          meeting['color'] = colorarray[color_idx];
           schedule[idx].push(meeting);
         }
 
@@ -70,8 +81,10 @@ angular.module('ionic-http-auth.controllers', [])
           meeting['time'] = courseList[i]['discussion_time'];
           meeting['room'] = courseList[i]['discussion_room'];
           meeting['courseName'] = courseList[i]['name'];
+          meeting['color'] = colorarray[color_idx];
           schedule[idx].push(meeting);
         }
+        color_idx = (color_idx + 1) % colorarray.length;
       }
 
 
@@ -125,6 +138,7 @@ angular.module('ionic-http-auth.controllers', [])
           div.style.maxHeight = height.toString() + 'px';
           div.style.marginTop = frameStartY.toString() + 'px';
           div.style.position = 'absolute';
+          div.style.opacity = 0.3;
 
           courseNumberNode = document.createElement('p');
           BuildingRoomNode = document.createElement('h6');
@@ -140,8 +154,10 @@ angular.module('ionic-http-auth.controllers', [])
             // InstructorText =
             //   document.createTextNode(schedule[i][j]["Instructor"]);
             div.className = "lecture-node";
+            div.style.backgroundColor = schedule[i][j]['color'][0];
           } else if (MeetingType == 'DI'){
             div.className = "discussion-node";
+            div.style.backgroundColor = schedule[i][j]['color'][1];
           }
           courseNumberNode.className = "course-num-text";
           BuildingRoomNode.className = "building-room-text";

@@ -14,12 +14,13 @@ table tr:nth-child(even) {
 }
 
 td,table-cell {
-   width:12%;
+   width:2%;
    min-height:7%;
    padding-bottom:15px;
    padding-top: 15px;
    padding-left: 1px;
    padding-right: 1px;
+   text-align: center;
 }
 
 .tablediv-container {
@@ -36,8 +37,9 @@ td,table-cell {
 #tablediv-time, #tablediv-mon, #tablediv-tue,
 #tablediv-wed, #tablediv-thu,#tablediv-fri,
 #tablediv-sat, #tablediv-sun {
-	width:12%;
+	width:10%;
 	display: table-cell;
+  padding-left:0.7%;
 }
 
 .backtable-tr > td{
@@ -45,20 +47,20 @@ td,table-cell {
 }
 
 .lecture-node{
-  background: #BDC3C7;
+  width: 11%;
 }
 
 .discussion-node{
-  background-color:#95A5A6;
+  width: 11%;
 }
 
 .course-num-text{
-  color:#2C3E50;
+  color:#ECF0F1;
   font-size:10px;
 }
 
 .building-room-text, .instructor-text{
-  color:#34495E;
+  color:#ECF0F1;
   font-size:8px;
 }
 
