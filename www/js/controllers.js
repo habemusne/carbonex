@@ -104,6 +104,30 @@ angular.module('ionic-http-auth.controllers', [])
         });
       }
 
+      // Checking conflict, if conflict, change its tag.
+      console.log(schedule[0][0]["time"]);
+      for (i = 0; i < schedule.length; ++i) {
+        if (schedule[i].length <= 1) {
+          continue;
+        }
+
+        for (j = 0; j < schedule[i].length - 1; j++) {
+          if (parseInt(schedule[i][j]["time"].substring(0, 2)) == 
+                parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
+            schedule[i][j]['overlap'] = 'L'
+            schedule[i][j + 1]['overlap'] = 'R'
+          }
+          else if (parseInt(schedule[i][j]["time"].substring(9, 11)) >=
+                parseInt(schedule[i][j + 1]["time"].substring(3, 5))) {
+            schedule[i][j]['overlap'] = 'L';
+            schedule[i][j + 1]['overlap'] = 'R';
+          }
+          else {
+            schedule[i][j + 1]['overlap'] = '';
+          }
+        }
+      }
+
       DayElements = [];
       DayElements.push(document.getElementById("tablediv-mon"));
       DayElements.push(document.getElementById("tablediv-tue"));
@@ -140,7 +164,11 @@ angular.module('ionic-http-auth.controllers', [])
           div.style.maxHeight = height.toString() + 'px';
           div.style.marginTop = frameStartY.toString() + 'px';
           div.style.position = 'absolute';
-          div.style.opacity = 0.3;
+          div.style.opacity = 0.8;
+          ///////////undone !!!!!!! 
+          if (schedule[i][j]['overlap'] == 'L'){
+
+          }
 
           courseNumberNode = document.createElement('p');
           BuildingRoomNode = document.createElement('h6');
