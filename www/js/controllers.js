@@ -105,7 +105,6 @@ angular.module('ionic-http-auth.controllers', [])
       }
 
       // Checking conflict, if conflict, change its tag.
-      console.log(schedule[0][0]["time"]);
       for (i = 0; i < schedule.length; ++i) {
         if (schedule[i].length <= 1) {
           continue;
@@ -167,7 +166,11 @@ angular.module('ionic-http-auth.controllers', [])
           div.style.opacity = 0.8;
           ///////////undone !!!!!!! 
           if (schedule[i][j]['overlap'] == 'L'){
-
+            div.style.width = '5.5%';
+          }
+          if (schedule[i][j]['overlap'] == 'R'){
+            div.style.width = '5.5%';
+            div.style.marginLeft = '5.5%';
           }
 
           courseNumberNode = document.createElement('p');
