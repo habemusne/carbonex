@@ -438,30 +438,6 @@ $scope.$on('event:auth-logout-complete', function() {
 })
 
 .controller('CourseCtrl', function($scope, $rootScope, $state, $http) {
-  $scope.remove = function(sectionid){
-    console.log("removing course"+sectionid);
-    $http({
-      url:'http://52.10.74.192/blog/deleteclass.php',
-      method:   "POST",
-        //headers: {'Content-Type': 'application/json'},
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        data: {'username':$scope.user.username,'password':$scope.user.password,'sectionid':sectionid}
-      })
-    .success(function (data, status, headers, config) {
-      console.log("Course removed successfully" + data);
-      $rootScope.courses = data;
-    })
-    .error(function (data, status, headers, config) {
-      console.log("Error occurred.  Status:" + status);
-    });
-  }
-  $scope.$on('$ionicView.afterEnter',function(){
-    console.log("Courses:"+$rootScope.courses);
-
-  })
-
-})
-.controller('AddCourseCtrl', function($scope,$rootScope, $state, $http,AuthenticationService) {
   $scope.candidates = [];
   $scope.$watch('candidates',function(){
     console.log($scope.candidates);
@@ -496,11 +472,27 @@ $scope.$on('event:auth-logout-complete', function() {
     console.log("Error occurred.  Status:" + status);
   });
 }
-$scope.$on('$ionicView.afterEnter',function(){
+  $scope.remove = function(sectionid){
+    console.log("removing course"+sectionid);
+    $http({
+      url:'http://52.10.74.192/blog/deleteclass.php',
+      method:   "POST",
+        //headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: {'username':$scope.user.username,'password':$scope.user.password,'sectionid':sectionid}
+      })
+    .success(function (data, status, headers, config) {
+      console.log("Course removed successfully" + data);
+      $rootScope.courses = data;
+    })
+    .error(function (data, status, headers, config) {
+      console.log("Error occurred.  Status:" + status);
+    });
+  }
+  $scope.$on('$ionicView.afterEnter',function(){
+    console.log("Courses:"+$rootScope.courses);
 
-});
-
-
+  })
 
 })
 

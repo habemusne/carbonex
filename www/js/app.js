@@ -83,15 +83,6 @@ angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.servic
 	      }
 	  }      	  
     })
-    .state('app.addcourse', {
-      url: "/addcourse",
-    views: {
-        'menuContent' :{
-            controller:  "AddCourseCtrl",
-            templateUrl: "templates/addcourse.html"             
-        }
-    }         
-    })
     .state('app.logout', {
       url: "/logout",
       views: {
