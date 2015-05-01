@@ -1,10 +1,10 @@
 /* Empty. Add your own CSS if you like */
 table, th , td {
   border-collapse: collapse;
-  padding: 5px;
 }
 table {
    width:100%;
+   table-layout: fixed
 }
 table tr:nth-child(odd) {
   background-color: #f1f1f1;
@@ -14,12 +14,9 @@ table tr:nth-child(even) {
 }
 
 td,table-cell {
-   width:2%;
    min-height:7%;
    padding-bottom:15px;
    padding-top: 15px;
-   padding-left: 1px;
-   padding-right: 1px;
    text-align: center;
 }
 p {
@@ -34,6 +31,7 @@ ion-nav-view {
 	position: absolute;
 	width:100%;
 	min-height:563px;
+  table-layout: fixed
 }
 
 .tablediv-row  {
