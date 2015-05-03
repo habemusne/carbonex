@@ -104,28 +104,85 @@ angular.module('ionic-http-auth.controllers', [])
         });
       }
 
-      // Checking conflict, if conflict, change its tag.
-      for (i = 0; i < schedule.length; ++i) {
-        if (schedule[i].length <= 1) {
-          continue;
-        }
+      // (check for all kinds of conflict)
+      if (schedule[0][0] == null) {}
+      else{
+        // count for checking how many courses conflict
+        count = 0;
 
-        for (j = 0; j < schedule[i].length - 1; j++) {
-          if (parseInt(schedule[i][j]["time"].substring(0, 2)) == 
-                parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
-            schedule[i][j]['overlap'] = 'L'
-            schedule[i][j + 1]['overlap'] = 'R'
+        // Checking conflict, if conflict, change its tag.
+        for (i = 0; i < schedule.length; ++i) {
+          if (schedule[i].length <= 1) {
+            continue;
           }
-          else if (parseInt(schedule[i][j]["time"].substring(9, 11)) >=
-                parseInt(schedule[i][j + 1]["time"].substring(3, 5))) {
-            schedule[i][j]['overlap'] = 'L';
-            schedule[i][j + 1]['overlap'] = 'R';
+
+          for (j = 0; j < schedule[i].length - 1; j++) {
+            if (parseInt(schedule[i][j]["time"].substring(0, 2)) == 
+                  parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
+              ++count;
+              schedule[i][j]['overlap'] = 'y';
+              schedule[i][j + 1]['overlap'] = 'y';
+            }
+
+            // 1st end hour larger than 2nd start hour
+            else if (parseInt(schedule[i][j]["time"].substring(6, 8)) >=
+                  parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
+              if (parseInt(schedule[i][j]["time"].substring(9, 11)) >=
+                  parseInt(schedule[i][j + 1]["time"].substring(3, 5))) {
+                ++count;
+                schedule[i][j]['overlap'] = 'y';
+                schedule[i][j + 1]['overlap'] = 'y';
+              }
+            }
+            else {
+              schedule[i][j + 1]['overlap'] = '';
+            }
           }
-          else {
-            schedule[i][j + 1]['overlap'] = '';
+
+          // check count
+          pos = 0;
+          for (j = 0; j < schedule[i].length; j++) {
+            if (schedule[i][j]['overlap'] == 'y') {
+              schedule[i][j]['count'] = count;
+              schedule[i][j]['pos'] = pos;
+              pos++;
+            }
           }
         }
       }
+
+      /* (check for maximum 2 conflict)
+      if (schedule[0][0] == null) {}
+      else{
+        // Checking conflict, if conflict, change its tag.
+        for (i = 0; i < schedule.length; ++i) {
+          if (schedule[i].length <= 1) {
+            continue;
+          }
+
+          for (j = 0; j < schedule[i].length - 1; j++) {
+            if (parseInt(schedule[i][j]["time"].substring(0, 2)) == 
+                  parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
+              schedule[i][j]['overlap'] = 'L';
+              schedule[i][j + 1]['overlap'] = 'R';
+            }
+
+            // 1st end hour larger than 2nd start hour
+            else if (parseInt(schedule[i][j]["time"].substring(6, 8)) >=
+                  parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
+              if (parseInt(schedule[i][j]["time"].substring(9, 11)) >=
+                  parseInt(schedule[i][j + 1]["time"].substring(3, 5))) {
+                schedule[i][j]['overlap'] = 'L';
+                schedule[i][j + 1]['overlap'] = 'R';
+              }
+            }
+            else {
+              schedule[i][j + 1]['overlap'] = '';
+            }
+          }
+        }
+      }
+      */
 
       DayElements = [];
       DayElements.push(document.getElementById("tablediv-mon"));
@@ -164,6 +221,15 @@ angular.module('ionic-http-auth.controllers', [])
           div.style.marginTop = frameStartY.toString() + 'px';
           div.style.position = 'absolute';
           div.style.opacity = 0.8;
+
+          if (schedule[i][j]['overlap'] == 'y') {
+            var width = 11 / schedule[i][j]['count'];
+            div.style.width = width + '%';
+            var marginL = schedule[i][j]['pos'] * width;
+            div.style.marginleft = marginL + '%';
+          }
+          
+          /*
           ///////////undone !!!!!!! 
           if (schedule[i][j]['overlap'] == 'L'){
             div.style.width = '5.5%';
@@ -172,6 +238,7 @@ angular.module('ionic-http-auth.controllers', [])
             div.style.width = '5.5%';
             div.style.marginLeft = '5.5%';
           }
+          */
 
           courseNumberNode = document.createElement('p');
           BuildingRoomNode = document.createElement('h6');
