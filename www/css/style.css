@@ -25,6 +25,12 @@ p {
 ion-nav-view {
   padding-left: 1%;
 }
+ion-tabs {
+  padding-top: 5%;
+}
+ion-nav-buttons {
+  padding-bottom: 5%;
+}
 
 .tablediv-container {
 	display: table;
