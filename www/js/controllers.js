@@ -119,13 +119,13 @@ angular.module('ionic-http-auth.controllers', [])
       }
 
       // (check for all kinds of conflict)
-      if (schedule[0][0] == null) {}
+      if (schedule[0] == null) {}
       else{
-        // count for checking how many courses conflict
-        count = 0;
-
         // Checking conflict, if conflict, change its tag.
         for (i = 0; i < schedule.length; ++i) {
+          // count for checking how many courses conflict
+          count = 1;
+
           if (schedule[i].length <= 1) {
             continue;
           }
@@ -133,6 +133,7 @@ angular.module('ionic-http-auth.controllers', [])
           for (j = 0; j < schedule[i].length - 1; j++) {
             if (parseInt(schedule[i][j]["time"].substring(0, 2)) == 
                   parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
+              //console.log("check 1");
               ++count;
               schedule[i][j]['overlap'] = 'y';
               schedule[i][j + 1]['overlap'] = 'y';
@@ -143,6 +144,7 @@ angular.module('ionic-http-auth.controllers', [])
                   parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
               if (parseInt(schedule[i][j]["time"].substring(9, 11)) >=
                   parseInt(schedule[i][j + 1]["time"].substring(3, 5))) {
+                //console.log("check 2");
                 ++count;
                 schedule[i][j]['overlap'] = 'y';
                 schedule[i][j + 1]['overlap'] = 'y';
@@ -240,8 +242,10 @@ angular.module('ionic-http-auth.controllers', [])
             var width = 11 / schedule[i][j]['count'];
             div.style.width = width + '%';
             var marginL = schedule[i][j]['pos'] * width;
-            div.style.marginleft = marginL + '%';
+            div.style.marginLeft = marginL + '%';
           }
+
+
           
           /*
           ///////////undone !!!!!!! 
