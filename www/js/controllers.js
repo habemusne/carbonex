@@ -113,6 +113,14 @@ angular.module('ionic-http-auth.controllers', [])
             return 1;
           } 
           else {
+            if (parseInt(meetingA["time"].substring(3, 5))
+              < parseInt(meetingB["time"].substring(3, 5))) {
+              return -1;
+            } 
+            else if (parseInt(meetingA["time"].substring(3, 5))
+            > parseInt(meetingB["time"].substring(3, 5))) {
+              return 1;
+            }
             return 0;
           }
         });
@@ -212,7 +220,6 @@ angular.module('ionic-http-auth.controllers', [])
       SCHEDULE_DAY_TOTAL_HOUR = 12;
       SCHEDULE_HTML_CELL_HEIGHT = 650; //563px, .tablediv-container
 
-      console.log(schedule);
 
       for (i = 0; i < DayElements.length; ++i){
         for (j = 0; j < schedule[i].length; ++j){
@@ -536,7 +543,6 @@ $scope.$on('event:auth-logout-complete', function() {
       SCHEDULE_DAY_TOTAL_HOUR = 12;
       SCHEDULE_HTML_CELL_HEIGHT = 650; //563px, .tablediv-container
 
-      console.log(schedule);
 
       for (i = 0; i < DayElements.length; ++i){
         for (j = 0; j < schedule[i].length; ++j){
