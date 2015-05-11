@@ -16,9 +16,35 @@ angular.module('ionic-http-auth.controllers', [])
   });
 })
 
-.controller('LoginCtrl', function($scope, $rootScope, $http, $state, AuthenticationService) {
+.controller('LoginCtrl', function($scope, $rootScope, $http, $state, AuthenticationService,$ionicPopup) {
   $scope.message = "";
-  
+  $scope.signup = function() {
+    //AuthenticationService.login($rootScope.user);
+    $http({
+      url:'http://52.10.74.192/blog/signup.php',
+      method:   "POST",
+        //headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: {'username':$rootScope.user.username,
+        'email':$rootScope.user.email,
+        'password':$rootScope.user.password,
+        'confirm':$rootScope.user.confirm,
+        'submit':'yes'}
+      })
+    .success(function (data, status, headers, config) {
+      console.log("Login Success: data " + data + "status: " + status);
+      var addSuccess = $ionicPopup.alert({
+     title: 'Signup Successful',
+     template: 'Your courses are now organized!'
+   });
+      $rootScope.courses = data;
+      $rootScope.authorized = true;
+       })
+.error(function (data, status, headers, config) {
+  console.log("Login Failed with data " + data + ", status " + status + " headers " + headers);
+  $rootScope.$broadcast('event:auth-login-failed', status);
+});
+}
 
 
   $scope.login = function() {

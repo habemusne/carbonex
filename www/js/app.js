@@ -25,7 +25,9 @@ angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.servic
   $rootScope.authorized = false;
   $rootScope.user = {
     username: null,
-    password: null
+    password: null,
+    email:null,
+    confirm:null
   };
   $rootScope.courses =[];
    //Default prompt to login
