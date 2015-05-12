@@ -42,6 +42,10 @@ angular.module('ionic-http-auth.controllers', [])
        })
 .error(function (data, status, headers, config) {
   console.log("Login Failed with data " + data + ", status " + status + " headers " + headers);
+  var addSuccess = $ionicPopup.alert({
+     title: 'Signup Failed',
+     template: 'status: '+ status + ' data: ' + headers 
+   });
   $rootScope.$broadcast('event:auth-login-failed', status);
 });
 }
@@ -341,6 +345,11 @@ angular.module('ionic-http-auth.controllers', [])
     })
 .error(function (data, status, headers, config) {
   console.log("Login Failed with data " + data + ", status " + status + " headers " + headers);
+   var addSuccess = $ionicPopup.alert({
+     title: 'Login Failed',
+     template: 'status: '+ status + ' data: ' + headers 
+
+   });
   $rootScope.$broadcast('event:auth-login-failed', status);
 });
 };
