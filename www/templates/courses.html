@@ -16,9 +16,18 @@
   </ion-tab>
   <ion-tab title="Add Courses" icon="icon ion-plus-round">
   <ion-view> 
-  <p> Click on a course to add to my courses </p>
-  <input type="text" placeholder="Enter any keywords" ng-model="keyword">
-  <button on-tap="search(keyword)">Search</button>
+  <form class="list" ng-submit="search(keyword)">
+        <div class="item item-divider">
+          Click on a course to add to my courses
+        </div>
+        <div>{{message}}</div>
+        <label class="item item-input">
+          <input type="text" placeholder="Keywords" ng-model="keyword" required>
+        </label>
+        <div class="padding">
+          <button class="button button-stable" ng-click="search(keyword)">Search</button>
+        </div>
+      </form>
     <div class="list">
       <a ng-repeat="course in candidates" class="item" on-tap="addCourse(course.sectionid)">
         <h2>{{ course.name }}  {{course.lecture_time}} {{course.lecture_room}} {{course.sectionid}}</h2>
