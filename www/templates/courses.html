@@ -3,19 +3,20 @@
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <!-- <ion-content padding="true"> -->
-  <ion-tabs padding="true"class="tabs-positive tabs-striped tabs-icon-top">
+  <ion-tabs class="tabs-positive tabs-striped tabs-icon-top has-header">
    <ion-tab title="My Courses" icon="icon ion-star">
-   <ion-view padding = "true">
-    <p> Click on a course to remove </p>
-    <div class="list">
-      <a ng-repeat="course in courses" class="item" on-tap="remove(course.sectionid)">
+   <ion-view class="has-header">
+    <form class="list">
+        <div class="item item-divider">
+          Click on a course to remove from my courses
+        </div>      <a ng-repeat="course in courses" class="item" on-tap="remove(course.sectionid)">
         <h2>{{ course.name }}  {{course.lecture_time}} {{course.lecture_room}} {{course.sectionid}} </h2>
       </a>
-    </div>
+    </form>
   </ion-view >
   </ion-tab>
   <ion-tab title="Add Courses" icon="icon ion-plus-round">
-  <ion-view> 
+  <ion-view class = "has-header"> 
   <form class="list" ng-submit="search(keyword)">
         <div class="item item-divider">
           Click on a course to add to my courses
