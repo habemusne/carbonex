@@ -274,6 +274,7 @@ angular.module('ionic-http-auth.controllers', [])
           div.style.marginTop = frameStartY.toString() + 'px';
           div.style.position = 'absolute';
           div.style.opacity = 0.8;
+          div.addEventListener("click",clickHandler,false);
 
           if (schedule[i][j]['overlap'] == 'y') {
             var width = 11 / schedule[i][j]['count'];
