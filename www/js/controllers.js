@@ -19,7 +19,6 @@ angular.module('ionic-http-auth.controllers', [])
 .controller('LoginCtrl', function($scope, $rootScope, $http, $state, AuthenticationService,$ionicPopup) {
   $scope.message = "";
   $scope.signup = function() {
-    //AuthenticationService.login($rootScope.user);
     $http({
       url:'http://52.10.74.192/blog/signup.php',
       method:   "POST",
@@ -52,7 +51,6 @@ angular.module('ionic-http-auth.controllers', [])
 
 
   $scope.login = function() {
-    //AuthenticationService.login($rootScope.user);
     $http({
       url:'http://52.10.74.192/blog/login.php',
       method:   "POST",
@@ -295,14 +293,14 @@ angular.module('ionic-http-auth.controllers', [])
           }
           */
 
-          courseNumberNode = document.createElement('p');
-          BuildingRoomNode = document.createElement('h6');
+          courseNumberNode = document.createElement('h6');
+          //BuildingRoomNode = document.createElement('h6');
           //InstructorNode = document.createElement('h6');
 
           courseNumberText =
           document.createTextNode(schedule[i][j]["courseName"]);
-          BuildingRoomText =
-          document.createTextNode(schedule[i][j]["room"]);
+          // BuildingRoomText =
+          // document.createTextNode(schedule[i][j]["room"]);
           //InstructorText = document.createTextNode("");
           MeetingType = schedule[i][j]["type"];
           if (MeetingType == 'LE'){
@@ -315,14 +313,14 @@ angular.module('ionic-http-auth.controllers', [])
             div.style.backgroundColor = schedule[i][j]['color'][1];
           }
           courseNumberNode.className = "course-num-text";
-          BuildingRoomNode.className = "building-room-text";
+          // BuildingRoomNode.className = "building-room-text";
           //InstructorNode.className = "instructor-text";
 
           courseNumberNode.appendChild(courseNumberText);
-          BuildingRoomNode.appendChild(BuildingRoomText);
+          // BuildingRoomNode.appendChild(BuildingRoomText);
           //InstructorNode.appendChild(InstructorText);
           div.appendChild(courseNumberNode);
-          div.appendChild(BuildingRoomNode);
+          // div.appendChild(BuildingRoomNode);
           //div.appendChild(InstructorNode);
           DayElements[i].appendChild(div);
 
@@ -621,14 +619,14 @@ $scope.$on('event:auth-logout-complete', function() {
           }
           */
 
-          courseNumberNode = document.createElement('p');
-          BuildingRoomNode = document.createElement('h6');
+          courseNumberNode = document.createElement('h6');
+          // BuildingRoomNode = document.createElement('h6');
           //InstructorNode = document.createElement('h6');
 
           courseNumberText =
           document.createTextNode(schedule[i][j]["courseName"]);
-          BuildingRoomText =
-          document.createTextNode(schedule[i][j]["room"]);
+          // BuildingRoomText =
+          // document.createTextNode(schedule[i][j]["room"]);
           //InstructorText = document.createTextNode("");
           MeetingType = schedule[i][j]["type"];
           if (MeetingType == 'LE'){
@@ -641,14 +639,14 @@ $scope.$on('event:auth-logout-complete', function() {
             div.style.backgroundColor = schedule[i][j]['color'][1];
           }
           courseNumberNode.className = "course-num-text";
-          BuildingRoomNode.className = "building-room-text";
+          // BuildingRoomNode.className = "building-room-text";
           //InstructorNode.className = "instructor-text";
 
           courseNumberNode.appendChild(courseNumberText);
-          BuildingRoomNode.appendChild(BuildingRoomText);
+          // BuildingRoomNode.appendChild(BuildingRoomText);
           //InstructorNode.appendChild(InstructorText);
           div.appendChild(courseNumberNode);
-          div.appendChild(BuildingRoomNode);
+          // div.appendChild(BuildingRoomNode);
           //div.appendChild(InstructorNode);
           DayElements[i].appendChild(div);
 
@@ -744,6 +742,8 @@ $scope.$on('event:auth-logout-complete', function() {
   AuthenticationService.logout();
 })
 
-
+.controller('PlaygroundCtrl', function($scope) {
+//Do nothing
+})
 
 

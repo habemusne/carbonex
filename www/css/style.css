@@ -19,6 +19,9 @@ td,table-cell {
    padding-top: 15px;
    text-align: center;
 }
+h6{
+  font-size: 14px;
+}
 p {
   padding-top:5%;
 }

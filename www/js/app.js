@@ -18,8 +18,6 @@ angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.servic
     }
   });
   
-  // Mocking code used for simulation purposes (using ngMockE2E module)	
-  var customers = [{name: 'John Smith'}, {name: 'Tim Johnson'}];
   var week = [{name:'Monday'},{name:'Tuesday'},{name:'Wednesday'},{name:'Thursday'},{name:'Friday'},{name:'Saturday'},{name:'Sunday'}];
 
   $rootScope.authorized = false;
@@ -30,17 +28,7 @@ angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.servic
     confirm:null
   };
   $rootScope.courses =[];
-   //Default prompt to login
-  // returns the current list of customers or a 401 depending on authorization flag
-  $httpBackend.whenGET('https://customers').respond(function (method, url, data, headers) {
-	  return authorized ? [200, customers] : [401];
-  });
-
-  $httpBackend.whenPOST('https://login').respond(function(method, url, data) {
-    authorized = true;
-    return  [200 , { authorizationToken: "NjMwNjM4OTQtMjE0Mi00ZWYzLWEzMDQtYWYyMjkyMzNiOGIy" } ];
-  });
-
+   
   $httpBackend.whenPOST('https://logout').respond(function(method, url, data) {
     authorized = false;
     return [200];
@@ -85,6 +73,15 @@ angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.servic
 	          templateUrl: "templates/courses.html"            	
 	      }
 	  }      	  
+    })
+    .state('app.playground', {
+      url: "/playground",
+    views: {
+        'menuContent' :{
+            controller:  "PlaygroundCtrl",
+            templateUrl: "templates/playground.html"             
+        }
+    }         
     })
     .state('app.logout', {
       url: "/logout",
