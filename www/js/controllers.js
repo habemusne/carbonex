@@ -34,21 +34,21 @@ angular.module('ionic-http-auth.controllers', [])
     .success(function (data, status, headers, config) {
       console.log("Login Success: data " + data + "status: " + status);
       var addSuccess = $ionicPopup.alert({
-     title: 'Signup Successful',
-     template: 'Your courses are now organized!'
-   });
+       title: 'Signup Successful',
+       template: 'Your courses are now organized!'
+     });
       $rootScope.courses = data;
       $rootScope.authorized = true;
-       })
-.error(function (data, status, headers, config) {
-  console.log("Login Failed with data " + data + ", status " + status + " headers " + headers);
-  var addSuccess = $ionicPopup.alert({
-     title: 'Signup Failed',
-     template: 'status: '+ status + ' data: ' + headers 
-   });
-  $rootScope.$broadcast('event:auth-login-failed', status);
-});
-}
+    })
+    .error(function (data, status, headers, config) {
+      console.log("Login Failed with data " + data + ", status " + status + " headers " + headers);
+      var addSuccess = $ionicPopup.alert({
+       title: 'Signup Failed',
+       template: 'status: '+ status + ' data: ' + headers 
+     });
+      $rootScope.$broadcast('event:auth-login-failed', status);
+    });
+  }
 
 
   $scope.login = function() {
@@ -67,98 +67,98 @@ angular.module('ionic-http-auth.controllers', [])
       $rootScope.authorized = true;
 
      //Change Title
-      var d = new Date();
-      var dayinweek = d.getDay();
-      console.log("dayinweek: "+dayinweek);
-      if (dayinweek == 0) dayinweek = 7
-        var currentHour = d.getHours();
-      console.log("Current day: " + dayinweek + "currentHour:" + currentHour);
-      if (currentHour >= 8 && currentHour < 24) 
-      {
-       var x = document.getElementById("classtable").rows;
-       x[0].cells[dayinweek].style.backgroundColor = 'lightblue';
-       console.log(x[0].cells);
+     var d = new Date();
+     var dayinweek = d.getDay();
+     console.log("dayinweek: "+dayinweek);
+     if (dayinweek == 0) dayinweek = 7
+      var currentHour = d.getHours();
+    console.log("Current day: " + dayinweek + "currentHour:" + currentHour);
+    if (currentHour >= 8 && currentHour < 24) 
+    {
+     var x = document.getElementById("classtable").rows;
+     x[0].cells[dayinweek].style.backgroundColor = 'lightblue';
+     console.log(x[0].cells);
 
 
-     }
-      var schedule = [
-      [],[],[],[],[],[],[]
-      ];
+   }
+   var schedule = [
+   [],[],[],[],[],[],[]
+   ];
 
-      courseList = $rootScope.courses;
-      day2ScheduleIndex = [];
-      day2ScheduleIndex['M'] = 0;
-      day2ScheduleIndex['Tu'] = 1;
-      day2ScheduleIndex['W'] = 2;
-      day2ScheduleIndex['Th'] = 3;
-      day2ScheduleIndex['F'] = 4;
-      day2ScheduleIndex['Sa'] = 5;
-      day2ScheduleIndex['Su'] = 6;
+   courseList = $rootScope.courses;
+   day2ScheduleIndex = [];
+   day2ScheduleIndex['M'] = 0;
+   day2ScheduleIndex['Tu'] = 1;
+   day2ScheduleIndex['W'] = 2;
+   day2ScheduleIndex['Th'] = 3;
+   day2ScheduleIndex['F'] = 4;
+   day2ScheduleIndex['Sa'] = 5;
+   day2ScheduleIndex['Su'] = 6;
 
-      colorarray = [['#F1C40F', '#F39C12'],
-                    ['#E67E22', '#D35400'],
-                    ['#E74C3C', '#C0392B'],
-                    ['#1ABC9C', '#16A085'],
-                    ['#95A5A6', '#7F8C8D'],
-                    ['#2ECC71', '#27AE60'],
-                    ['#34495E', '#2C3E50']];
+   colorarray = [['#F1C40F', '#F39C12'],
+   ['#E67E22', '#D35400'],
+   ['#E74C3C', '#C0392B'],
+   ['#1ABC9C', '#16A085'],
+   ['#95A5A6', '#7F8C8D'],
+   ['#2ECC71', '#27AE60'],
+   ['#34495E', '#2C3E50']];
 
-      color_idx = 0;
-      for (i = 0; i < courseList.length; ++i){
-        lecture_days = courseList[i]['lecture_day'].split(',');
-        for (j = 0; j < lecture_days.length; ++j){
-          idx = day2ScheduleIndex[lecture_days[j]];
-          meeting = {};
-          meeting['type'] = 'LE';
-          meeting['time'] = courseList[i]['lecture_time'];
-          meeting['room'] = courseList[i]['lecture_room'];
-          meeting['courseName'] = courseList[i]['name'];
-          meeting['color'] = colorarray[color_idx];
-          schedule[idx].push(meeting);
-        }
+   color_idx = 0;
+   for (i = 0; i < courseList.length; ++i){
+    lecture_days = courseList[i]['lecture_day'].split(',');
+    for (j = 0; j < lecture_days.length; ++j){
+      idx = day2ScheduleIndex[lecture_days[j]];
+      meeting = {};
+      meeting['type'] = 'LE';
+      meeting['time'] = courseList[i]['lecture_time'];
+      meeting['room'] = courseList[i]['lecture_room'];
+      meeting['courseName'] = courseList[i]['name'];
+      meeting['color'] = colorarray[color_idx];
+      schedule[idx].push(meeting);
+    }
 
-        discussion_days = courseList[i]['discussion_day'].split(',');
-        for (j = 0; j < discussion_days.length; ++j){
-          idx = day2ScheduleIndex[discussion_days[j]];
-          meeting = {};
-          meeting['type'] = 'DI';
-          meeting['time'] = courseList[i]['discussion_time'];
-          meeting['room'] = courseList[i]['discussion_room'];
-          meeting['courseName'] = courseList[i]['name'];
-          meeting['color'] = colorarray[color_idx];
-          schedule[idx].push(meeting);
-        }
-        color_idx = (color_idx + 1) % colorarray.length;
-      }
+    discussion_days = courseList[i]['discussion_day'].split(',');
+    for (j = 0; j < discussion_days.length; ++j){
+      idx = day2ScheduleIndex[discussion_days[j]];
+      meeting = {};
+      meeting['type'] = 'DI';
+      meeting['time'] = courseList[i]['discussion_time'];
+      meeting['room'] = courseList[i]['discussion_room'];
+      meeting['courseName'] = courseList[i]['name'];
+      meeting['color'] = colorarray[color_idx];
+      schedule[idx].push(meeting);
+    }
+    color_idx = (color_idx + 1) % colorarray.length;
+  }
 
 
-      for (i = 0; i < schedule.length; ++i){
-        schedule[i].sort(function(meetingA, meetingB){
-          if (parseInt(meetingA["time"].substring(0, 2))
-            < parseInt(meetingB["time"].substring(0, 2))) {
-            return -1;
-          } 
-          else if (parseInt(meetingA["time"].substring(0, 2))
-          > parseInt(meetingB["time"].substring(0, 2))) {
-            return 1;
-          } 
-          else {
-            if (parseInt(meetingA["time"].substring(3, 5))
-              < parseInt(meetingB["time"].substring(3, 5))) {
-              return -1;
-            } 
-            else if (parseInt(meetingA["time"].substring(3, 5))
-            > parseInt(meetingB["time"].substring(3, 5))) {
-              return 1;
-            }
-            return 0;
-          }
-        });
-      }
+  for (i = 0; i < schedule.length; ++i){
+    schedule[i].sort(function(meetingA, meetingB){
+      if (parseInt(meetingA["time"].substring(0, 2))
+        < parseInt(meetingB["time"].substring(0, 2))) {
+        return -1;
+    } 
+    else if (parseInt(meetingA["time"].substring(0, 2))
+      > parseInt(meetingB["time"].substring(0, 2))) {
+      return 1;
+  } 
+  else {
+    if (parseInt(meetingA["time"].substring(3, 5))
+      < parseInt(meetingB["time"].substring(3, 5))) {
+      return -1;
+  } 
+  else if (parseInt(meetingA["time"].substring(3, 5))
+    > parseInt(meetingB["time"].substring(3, 5))) {
+    return 1;
+}
+return 0;
+}
+});
+  }
 
       // (check for all kinds of conflict)
       if (schedule[0] == null) {}
-      else{
+        else{
         // Checking conflict, if conflict, change its tag.
         for (i = 0; i < schedule.length; ++i) {
           // count for checking how many courses conflict
@@ -170,28 +170,28 @@ angular.module('ionic-http-auth.controllers', [])
 
           for (j = 0; j < schedule[i].length - 1; j++) {
             if (parseInt(schedule[i][j]["time"].substring(0, 2)) == 
-                  parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
+              parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
               //console.log("check 1");
+            ++count;
+            schedule[i][j]['overlap'] = 'y';
+            schedule[i][j + 1]['overlap'] = 'y';
+          }
+
+            // 1st end hour larger than 2nd start hour
+            else if (parseInt(schedule[i][j]["time"].substring(6, 8)) >=
+              parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
+              if (parseInt(schedule[i][j]["time"].substring(9, 11)) >=
+                parseInt(schedule[i][j + 1]["time"].substring(3, 5))) {
+                //console.log("check 2");
               ++count;
               schedule[i][j]['overlap'] = 'y';
               schedule[i][j + 1]['overlap'] = 'y';
             }
-
-            // 1st end hour larger than 2nd start hour
-            else if (parseInt(schedule[i][j]["time"].substring(6, 8)) >=
-                  parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
-              if (parseInt(schedule[i][j]["time"].substring(9, 11)) >=
-                  parseInt(schedule[i][j + 1]["time"].substring(3, 5))) {
-                //console.log("check 2");
-                ++count;
-                schedule[i][j]['overlap'] = 'y';
-                schedule[i][j + 1]['overlap'] = 'y';
-              }
-            }
-            else {
-              schedule[i][j + 1]['overlap'] = '';
-            }
           }
+          else {
+            schedule[i][j + 1]['overlap'] = '';
+          }
+        }
 
           // check count
           pos = 0;
@@ -276,15 +276,24 @@ angular.module('ionic-http-auth.controllers', [])
           div.style.opacity = 0.8;
           div.addEventListener("click",clickHandler,false);
 
-          if (schedule[i][j]['overlap'] == 'y') {
-            var width = 11 / schedule[i][j]['count'];
-            div.style.width = width + '%';
-            var marginL = schedule[i][j]['pos'] * width;
-            div.style.marginLeft = marginL + '%';
-          }
+          function clickHandler(e){
+           var addSuccess = $ionicPopup.alert({
+            title: 'Course Info',
+             template: 'Name'+ schedule[i][j]["courseName"] + '\nPlace:'
+             + schedule[i][j]["room"] 
+
+           });
+         }
+
+         if (schedule[i][j]['overlap'] == 'y') {
+          var width = 11 / schedule[i][j]['count'];
+          div.style.width = width + '%';
+          var marginL = schedule[i][j]['pos'] * width;
+          div.style.marginLeft = marginL + '%';
+        }
 
 
-          
+
           /*
           ///////////undone !!!!!!! 
           if (schedule[i][j]['overlap'] == 'L'){
@@ -346,11 +355,11 @@ angular.module('ionic-http-auth.controllers', [])
     })
 .error(function (data, status, headers, config) {
   console.log("Login Failed with data " + data + ", status " + status + " headers " + headers);
-   var addSuccess = $ionicPopup.alert({
-     title: 'Login Failed',
-     template: 'status: '+ status + ' data: ' + headers 
+  var addSuccess = $ionicPopup.alert({
+   title: 'Login Failed',
+   template: 'status: '+ status + ' data: ' + headers 
 
-   });
+ });
   $rootScope.$broadcast('event:auth-login-failed', status);
 });
 };
@@ -421,75 +430,75 @@ $scope.$on('event:auth-logout-complete', function() {
 
 
      var schedule = [
-      [],[],[],[],[],[],[]
-      ];
+     [],[],[],[],[],[],[]
+     ];
 
-      courseList = $rootScope.courses;
-      day2ScheduleIndex = [];
-      day2ScheduleIndex['M'] = 0;
-      day2ScheduleIndex['Tu'] = 1;
-      day2ScheduleIndex['W'] = 2;
-      day2ScheduleIndex['Th'] = 3;
-      day2ScheduleIndex['F'] = 4;
-      day2ScheduleIndex['Sa'] = 5;
-      day2ScheduleIndex['Su'] = 6;
+     courseList = $rootScope.courses;
+     day2ScheduleIndex = [];
+     day2ScheduleIndex['M'] = 0;
+     day2ScheduleIndex['Tu'] = 1;
+     day2ScheduleIndex['W'] = 2;
+     day2ScheduleIndex['Th'] = 3;
+     day2ScheduleIndex['F'] = 4;
+     day2ScheduleIndex['Sa'] = 5;
+     day2ScheduleIndex['Su'] = 6;
 
-      colorarray = [['#F1C40F', '#F39C12'],
-                    ['#E67E22', '#D35400'],
-                    ['#E74C3C', '#C0392B'],
-                    ['#1ABC9C', '#16A085'],
-                    ['#95A5A6', '#7F8C8D'],
-                    ['#2ECC71', '#27AE60'],
-                    ['#34495E', '#2C3E50']];
+     colorarray = [['#F1C40F', '#F39C12'],
+     ['#E67E22', '#D35400'],
+     ['#E74C3C', '#C0392B'],
+     ['#1ABC9C', '#16A085'],
+     ['#95A5A6', '#7F8C8D'],
+     ['#2ECC71', '#27AE60'],
+     ['#34495E', '#2C3E50']];
 
-      color_idx = 0;
-      for (i = 0; i < courseList.length; ++i){
-        lecture_days = courseList[i]['lecture_day'].split(',');
-        for (j = 0; j < lecture_days.length; ++j){
-          idx = day2ScheduleIndex[lecture_days[j]];
-          meeting = {};
-          meeting['type'] = 'LE';
-          meeting['time'] = courseList[i]['lecture_time'];
-          meeting['room'] = courseList[i]['lecture_room'];
-          meeting['courseName'] = courseList[i]['name'];
-          meeting['color'] = colorarray[color_idx];
-          schedule[idx].push(meeting);
-        }
-
-        discussion_days = courseList[i]['discussion_day'].split(',');
-        for (j = 0; j < discussion_days.length; ++j){
-          idx = day2ScheduleIndex[discussion_days[j]];
-          meeting = {};
-          meeting['type'] = 'DI';
-          meeting['time'] = courseList[i]['discussion_time'];
-          meeting['room'] = courseList[i]['discussion_room'];
-          meeting['courseName'] = courseList[i]['name'];
-          meeting['color'] = colorarray[color_idx];
-          schedule[idx].push(meeting);
-        }
-        color_idx = (color_idx + 1) % colorarray.length;
+     color_idx = 0;
+     for (i = 0; i < courseList.length; ++i){
+      lecture_days = courseList[i]['lecture_day'].split(',');
+      for (j = 0; j < lecture_days.length; ++j){
+        idx = day2ScheduleIndex[lecture_days[j]];
+        meeting = {};
+        meeting['type'] = 'LE';
+        meeting['time'] = courseList[i]['lecture_time'];
+        meeting['room'] = courseList[i]['lecture_room'];
+        meeting['courseName'] = courseList[i]['name'];
+        meeting['color'] = colorarray[color_idx];
+        schedule[idx].push(meeting);
       }
 
-
-      for (i = 0; i < schedule.length; ++i){
-        schedule[i].sort(function(meetingA, meetingB){
-          if (parseInt(meetingA["time"].substring(0, 2))
-            < parseInt(meetingB["time"].substring(0, 2))) {
-            return -1;
-          } 
-          else if (parseInt(meetingA["time"].substring(0, 2))
-          > parseInt(meetingB["time"].substring(0, 2))) {
-            return 1;
-          } 
-          else {
-            return 0;
-          }
-        });
+      discussion_days = courseList[i]['discussion_day'].split(',');
+      for (j = 0; j < discussion_days.length; ++j){
+        idx = day2ScheduleIndex[discussion_days[j]];
+        meeting = {};
+        meeting['type'] = 'DI';
+        meeting['time'] = courseList[i]['discussion_time'];
+        meeting['room'] = courseList[i]['discussion_room'];
+        meeting['courseName'] = courseList[i]['name'];
+        meeting['color'] = colorarray[color_idx];
+        schedule[idx].push(meeting);
       }
+      color_idx = (color_idx + 1) % colorarray.length;
+    }
+
+
+    for (i = 0; i < schedule.length; ++i){
+      schedule[i].sort(function(meetingA, meetingB){
+        if (parseInt(meetingA["time"].substring(0, 2))
+          < parseInt(meetingB["time"].substring(0, 2))) {
+          return -1;
+      } 
+      else if (parseInt(meetingA["time"].substring(0, 2))
+        > parseInt(meetingB["time"].substring(0, 2))) {
+        return 1;
+    } 
+    else {
+      return 0;
+    }
+  });
+    }
 
       // (check for all kinds of conflict)
       if (schedule[0][0] == null) {}
-      else{
+        else{
         // count for checking how many courses conflict
         count = 0;
 
@@ -501,26 +510,26 @@ $scope.$on('event:auth-logout-complete', function() {
 
           for (j = 0; j < schedule[i].length - 1; j++) {
             if (parseInt(schedule[i][j]["time"].substring(0, 2)) == 
-                  parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
+              parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
               ++count;
-              schedule[i][j]['overlap'] = 'y';
-              schedule[i][j + 1]['overlap'] = 'y';
-            }
+            schedule[i][j]['overlap'] = 'y';
+            schedule[i][j + 1]['overlap'] = 'y';
+          }
 
             // 1st end hour larger than 2nd start hour
             else if (parseInt(schedule[i][j]["time"].substring(6, 8)) >=
-                  parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
+              parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
               if (parseInt(schedule[i][j]["time"].substring(9, 11)) >=
-                  parseInt(schedule[i][j + 1]["time"].substring(3, 5))) {
+                parseInt(schedule[i][j + 1]["time"].substring(3, 5))) {
                 ++count;
-                schedule[i][j]['overlap'] = 'y';
-                schedule[i][j + 1]['overlap'] = 'y';
-              }
-            }
-            else {
-              schedule[i][j + 1]['overlap'] = '';
+              schedule[i][j]['overlap'] = 'y';
+              schedule[i][j + 1]['overlap'] = 'y';
             }
           }
+          else {
+            schedule[i][j + 1]['overlap'] = '';
+          }
+        }
 
           // check count
           pos = 0;
@@ -603,14 +612,24 @@ $scope.$on('event:auth-logout-complete', function() {
           div.style.marginTop = frameStartY.toString() + 'px';
           div.style.position = 'absolute';
           div.style.opacity = 0.8;
+          div.addEventListener("click",clickHandler,false);
 
-          if (schedule[i][j]['overlap'] == 'y') {
-            var width = 11 / schedule[i][j]['count'];
-            div.style.width = width + '%';
-            var marginL = schedule[i][j]['pos'] * width;
-            div.style.marginleft = marginL + '%';
-          }
-          
+          function clickHandler(e){
+           var addSuccess = $ionicPopup.alert({
+            title: 'Course Info',
+             template: 'Name'+ schedule[i][j]["courseName"] + '\nPlace:'
+             + schedule[i][j]["room"] 
+
+           });
+         }
+
+         if (schedule[i][j]['overlap'] == 'y') {
+          var width = 11 / schedule[i][j]['count'];
+          div.style.width = width + '%';
+          var marginL = schedule[i][j]['pos'] * width;
+          div.style.marginleft = marginL + '%';
+        }
+
           /*
           ///////////undone !!!!!!! 
           if (schedule[i][j]['overlap'] == 'L'){
@@ -661,7 +680,7 @@ $scope.$on('event:auth-logout-complete', function() {
 
 
 
-  })
+    })
 });
 
 })
@@ -695,7 +714,7 @@ $scope.$on('event:auth-logout-complete', function() {
       })
   .success(function (data, status, headers, config) {
     console.log("Course added successfully");
-     var addSuccess = $ionicPopup.alert({
+    var addSuccess = $ionicPopup.alert({
      title: 'Courses added successfully',
      template: ''
    });
@@ -709,35 +728,35 @@ $scope.$on('event:auth-logout-complete', function() {
    });
   });
 }
-  $scope.remove = function(sectionid){
-    console.log("removing course"+sectionid);
-    $http({
-      url:'http://52.10.74.192/blog/deleteclass.php',
-      method:   "POST",
+$scope.remove = function(sectionid){
+  console.log("removing course"+sectionid);
+  $http({
+    url:'http://52.10.74.192/blog/deleteclass.php',
+    method:   "POST",
         //headers: {'Content-Type': 'application/json'},
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         data: {'username':$scope.user.username,'password':$scope.user.password,'sectionid':sectionid}
       })
-    .success(function (data, status, headers, config) {
-      console.log("Course removed successfully" + data);
-      var addSuccess = $ionicPopup.alert({
+  .success(function (data, status, headers, config) {
+    console.log("Course removed successfully" + data);
+    var addSuccess = $ionicPopup.alert({
      title: 'Courses removed successfully',
      template: ''
    });
-      $rootScope.courses = data;
-    })
-    .error(function (data, status, headers, config) {
-      console.log("Error occurred.  Status:" + status);
-      var addSuccess = $ionicPopup.alert({
+    $rootScope.courses = data;
+  })
+  .error(function (data, status, headers, config) {
+    console.log("Error occurred.  Status:" + status);
+    var addSuccess = $ionicPopup.alert({
      title: 'Courses failed to remove',
      template: status
    });
-    });
-  }
-  $scope.$on('$ionicView.afterEnter',function(){
-    console.log("Courses:"+$rootScope.courses);
+  });
+}
+$scope.$on('$ionicView.afterEnter',function(){
+  console.log("Courses:"+$rootScope.courses);
 
-  })
+})
 
 })
 
