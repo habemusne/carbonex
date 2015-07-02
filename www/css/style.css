@@ -20,7 +20,10 @@ td,table-cell {
    text-align: center;
 }
 h6{
-  font-size: 14px;
+  font-family: "Times New Roman", Times, serif;
+  /*font-size: 25px;*/
+  text-align: center;
+  font-weight: bold;
 }
 p {
   padding-top:5%;
@@ -69,7 +72,7 @@ ion-nav-buttons {
 
 .course-num-text{
   color:#ECF0F1;
-  font-size:10px;
+  font-size:15px;
 }
 
 .building-room-text, .instructor-text{

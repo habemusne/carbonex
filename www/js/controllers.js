@@ -93,13 +93,13 @@ angular.module('ionic-http-auth.controllers', [])
    day2ScheduleIndex['Sa'] = 5;
    day2ScheduleIndex['Su'] = 6;
 
-   colorarray = [['#F1C40F', '#F39C12'],
-   ['#E67E22', '#D35400'],
-   ['#E74C3C', '#C0392B'],
-   ['#1ABC9C', '#16A085'],
-   ['#95A5A6', '#7F8C8D'],
-   ['#2ECC71', '#27AE60'],
-   ['#34495E', '#2C3E50']];
+   colorarray = [['#91ccd9', '#049dbf'],
+   ['#7cbe8e', '#50a578'],
+   ['#9aa2c6', '#646fa1'],
+   ['#f8a391', '#f26c62'],
+   ['#2fbeee', '#8ce2ff'],
+   ['#ffc0cb', '#ff77aa'],
+   ['#9cf9b5', '#81ea9d']];
 
    color_idx = 0;
    for (i = 0; i < courseList.length; ++i){
@@ -441,13 +441,13 @@ $scope.$on('event:auth-logout-complete', function() {
      day2ScheduleIndex['Sa'] = 5;
      day2ScheduleIndex['Su'] = 6;
 
-     colorarray = [['#F1C40F', '#F39C12'],
-     ['#E67E22', '#D35400'],
-     ['#E74C3C', '#C0392B'],
-     ['#1ABC9C', '#16A085'],
-     ['#95A5A6', '#7F8C8D'],
-     ['#2ECC71', '#27AE60'],
-     ['#34495E', '#2C3E50']];
+     colorarray = [['#91ccd9', '#049dbf'],
+      ['#7cbe8e', '#50a578'],
+      ['#9aa2c6', '#646fa1'],
+      ['#f8a391', '#f26c62'],
+      ['#2fbeee', '#8ce2ff'],
+      ['#ffc0cb', '#ff77aa'],
+      ['#9cf9b5', '#81ea9d']];
 
      color_idx = 0;
      for (i = 0; i < courseList.length; ++i){
