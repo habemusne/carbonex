@@ -14,14 +14,16 @@ table tr:nth-child(even) {
 }
 
 td,table-cell {
-   min-height:7%;
-   padding-bottom:15px;
-   padding-top: 15px;
+   min-height:10%;
+   padding-bottom:18px;
+   padding-top: 18px;
    text-align: center;
 }
 h6{
   font-family: "Times New Roman", Times, serif;
-  /*font-size: 25px;*/
+  margin-top: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   text-align: center;
   font-weight: bold;
 }

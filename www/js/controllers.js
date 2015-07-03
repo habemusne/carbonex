@@ -75,8 +75,6 @@ angular.module('ionic-http-auth.controllers', [])
     {
      var x = document.getElementById("classtable").rows;
      x[0].cells[dayinweek].style.backgroundColor = 'lightblue';
-     console.log(x[0].cells);
-
 
    }
    var schedule = [
@@ -102,6 +100,8 @@ angular.module('ionic-http-auth.controllers', [])
    ['#9cf9b5', '#81ea9d']];
 
    color_idx = 0;
+   base_height = 56.0;
+   base_length = 66.0;
    for (i = 0; i < courseList.length; ++i){
     lecture_days = courseList[i]['lecture_day'].split(',');
     for (j = 0; j < lecture_days.length; ++j){
@@ -255,16 +255,15 @@ return 0;
           startTime_base10 = parseFloat(time.substring(0, 2))
           + parseFloat(time.substring(3, 5)) / 60.0;
           diff = startTime_base10 - SCHEDULE_DAY_START_HOUR;
-          frameStartY = 50 * (diff + 1);
+          frameStartY = base_height * (diff + 1);
 
           endTime_base10 = parseFloat(time.substring(6, 8))
           + parseFloat(time.substring(9, 11)) / 60.0;
           diff = endTime_base10 - SCHEDULE_DAY_START_HOUR;
-          frameEndY = 50 * (diff + 1);
+          frameEndY = base_height * (diff + 1);
 
           height = frameEndY - frameStartY;
 
-          // console.log(schedule[i][j]["courseName"] + ': startTime_base10 = ' + startTime_base10 + ', endTime_base10 = ' + endTime_base10 + ', frameStartY  = ' + frameStartY + ', frameEndY = ' + frameEndY + ', height = ' + height);
 
           div = document.createElement('DIV');
           div.style.minHeight = height.toString() + 'px';
@@ -290,32 +289,14 @@ return 0;
           div.style.marginLeft = marginL + '%';
         }
 
-
-
-          /*
-          ///////////undone !!!!!!! 
-          if (schedule[i][j]['overlap'] == 'L'){
-            div.style.width = '5.5%';
-          }
-          if (schedule[i][j]['overlap'] == 'R'){
-            div.style.width = '5.5%';
-            div.style.marginLeft = '5.5%';
-          }
-          */
-
           courseNumberNode = document.createElement('h6');
-          //BuildingRoomNode = document.createElement('h6');
-          //InstructorNode = document.createElement('h6');
 
           courseNumberText =
           document.createTextNode(schedule[i][j]["courseName"]);
-          // BuildingRoomText =
-          // document.createTextNode(schedule[i][j]["room"]);
-          //InstructorText = document.createTextNode("");
+
           MeetingType = schedule[i][j]["type"];
           if (MeetingType == 'LE'){
-            // InstructorText =
-            //   document.createTextNode(schedule[i][j]["Instructor"]);
+
             div.className = "lecture-node";
             div.style.backgroundColor = schedule[i][j]['color'][0];
           } else if (MeetingType == 'DI'){
@@ -323,30 +304,17 @@ return 0;
             div.style.backgroundColor = schedule[i][j]['color'][1];
           }
           courseNumberNode.className = "course-num-text";
-          // BuildingRoomNode.className = "building-room-text";
-          //InstructorNode.className = "instructor-text";
+
 
           courseNumberNode.appendChild(courseNumberText);
-          // BuildingRoomNode.appendChild(BuildingRoomText);
-          //InstructorNode.appendChild(InstructorText);
+
           div.appendChild(courseNumberNode);
-          // div.appendChild(BuildingRoomNode);
-          //div.appendChild(InstructorNode);
+
           DayElements[i].appendChild(div);
 
-          //Expected: append a new created div element to DayElements[i].
-          //  This div should have min-height = height and
-          //  margin-top = frameStartY
+
         }
       }
-
-
-
-
-
-
-
-
 
 
       $rootScope.$broadcast('event:auth-loginConfirmed', data);
@@ -368,8 +336,6 @@ $scope.$on('event:auth-loginRequired', function(e, rejection) {
 
 $scope.$on('event:auth-loginConfirmed', function() {
     //Commenting out because we want to buffer rootScope username and password
-   // $scope.username = null;
-   // $scope.password = null;
    $scope.loginModal.hide();
  });
 
@@ -403,7 +369,6 @@ $scope.$on('event:auth-logout-complete', function() {
       for (var i = 0; i <= 12; i++) {
         $scope.day.push({hour:oclock.toString(),minute:'00'});
         oclock = oclock + 1;
-        //Change Title
 
       };
     });
@@ -450,6 +415,7 @@ $scope.$on('event:auth-logout-complete', function() {
       ['#9cf9b5', '#81ea9d']];
 
      color_idx = 0;
+     base_height = 56.0;
      for (i = 0; i < courseList.length; ++i){
       lecture_days = courseList[i]['lecture_day'].split(',');
       for (j = 0; j < lecture_days.length; ++j){
@@ -541,39 +507,6 @@ $scope.$on('event:auth-logout-complete', function() {
         }
       }
 
-      /* (check for maximum 2 conflict)
-      if (schedule[0][0] == null) {}
-      else{
-        // Checking conflict, if conflict, change its tag.
-        for (i = 0; i < schedule.length; ++i) {
-          if (schedule[i].length <= 1) {
-            continue;
-          }
-
-          for (j = 0; j < schedule[i].length - 1; j++) {
-            if (parseInt(schedule[i][j]["time"].substring(0, 2)) == 
-                  parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
-              schedule[i][j]['overlap'] = 'L';
-              schedule[i][j + 1]['overlap'] = 'R';
-            }
-
-            // 1st end hour larger than 2nd start hour
-            else if (parseInt(schedule[i][j]["time"].substring(6, 8)) >=
-                  parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
-              if (parseInt(schedule[i][j]["time"].substring(9, 11)) >=
-                  parseInt(schedule[i][j + 1]["time"].substring(3, 5))) {
-                schedule[i][j]['overlap'] = 'L';
-                schedule[i][j + 1]['overlap'] = 'R';
-              }
-            }
-            else {
-              schedule[i][j + 1]['overlap'] = '';
-            }
-          }
-        }
-      }
-      */
-
       DayElements = [];
       DayElements.push(document.getElementById("tablediv-mon"));
       DayElements.push(document.getElementById("tablediv-tue"));
@@ -593,12 +526,12 @@ $scope.$on('event:auth-logout-complete', function() {
           startTime_base10 = parseFloat(time.substring(0, 2))
           + parseFloat(time.substring(3, 5)) / 60.0;
           diff = startTime_base10 - SCHEDULE_DAY_START_HOUR;
-          frameStartY = 50 * (diff + 1);
+          frameStartY = base_height * (diff + 1);
 
           endTime_base10 = parseFloat(time.substring(6, 8))
           + parseFloat(time.substring(9, 11)) / 60.0;
           diff = endTime_base10 - SCHEDULE_DAY_START_HOUR;
-          frameEndY = 50 * (diff + 1);
+          frameEndY = base_height * (diff + 1);
 
           height = frameEndY - frameStartY;
 
@@ -628,30 +561,14 @@ $scope.$on('event:auth-logout-complete', function() {
           div.style.marginleft = marginL + '%';
         }
 
-          /*
-          ///////////undone !!!!!!! 
-          if (schedule[i][j]['overlap'] == 'L'){
-            div.style.width = '5.5%';
-          }
-          if (schedule[i][j]['overlap'] == 'R'){
-            div.style.width = '5.5%';
-            div.style.marginLeft = '5.5%';
-          }
-          */
-
           courseNumberNode = document.createElement('h6');
-          // BuildingRoomNode = document.createElement('h6');
-          //InstructorNode = document.createElement('h6');
 
           courseNumberText =
           document.createTextNode(schedule[i][j]["courseName"]);
-          // BuildingRoomText =
-          // document.createTextNode(schedule[i][j]["room"]);
-          //InstructorText = document.createTextNode("");
+
           MeetingType = schedule[i][j]["type"];
           if (MeetingType == 'LE'){
-            // InstructorText =
-            //   document.createTextNode(schedule[i][j]["Instructor"]);
+
             div.className = "lecture-node";
             div.style.backgroundColor = schedule[i][j]['color'][0];
           } else if (MeetingType == 'DI'){
@@ -659,20 +576,13 @@ $scope.$on('event:auth-logout-complete', function() {
             div.style.backgroundColor = schedule[i][j]['color'][1];
           }
           courseNumberNode.className = "course-num-text";
-          // BuildingRoomNode.className = "building-room-text";
-          //InstructorNode.className = "instructor-text";
 
           courseNumberNode.appendChild(courseNumberText);
-          // BuildingRoomNode.appendChild(BuildingRoomText);
-          //InstructorNode.appendChild(InstructorText);
+
           div.appendChild(courseNumberNode);
-          // div.appendChild(BuildingRoomNode);
-          //div.appendChild(InstructorNode);
+
           DayElements[i].appendChild(div);
 
-          //Expected: append a new created div element to DayElements[i].
-          //  This div should have min-height = height and
-          //  margin-top = frameStartY
         }
       }
 
