@@ -18,6 +18,8 @@ td,table-cell {
    padding-bottom:18px;
    padding-top: 18px;
    text-align: center;
+   border-radius: 0px;
+
 }
 h6{
   font-family: "Times New Roman", Times, serif;
@@ -66,10 +68,12 @@ ion-nav-buttons {
 
 .lecture-node{
   width: 11%;
+  border-radius: 5px;
 }
 
 .discussion-node{
   width: 11%;
+  border-radius: 5px;
 }
 
 .course-num-text{
