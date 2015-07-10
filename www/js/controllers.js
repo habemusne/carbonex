@@ -203,39 +203,6 @@ return 0;
         }
       }
 
-      /* (check for maximum 2 conflict)
-      if (schedule[0][0] == null) {}
-      else{
-        // Checking conflict, if conflict, change its tag.
-        for (i = 0; i < schedule.length; ++i) {
-          if (schedule[i].length <= 1) {
-            continue;
-          }
-
-          for (j = 0; j < schedule[i].length - 1; j++) {
-            if (parseInt(schedule[i][j]["time"].substring(0, 2)) == 
-                  parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
-              schedule[i][j]['overlap'] = 'L';
-              schedule[i][j + 1]['overlap'] = 'R';
-            }
-
-            // 1st end hour larger than 2nd start hour
-            else if (parseInt(schedule[i][j]["time"].substring(6, 8)) >=
-                  parseInt(schedule[i][j + 1]["time"].substring(0, 2))) {
-              if (parseInt(schedule[i][j]["time"].substring(9, 11)) >=
-                  parseInt(schedule[i][j + 1]["time"].substring(3, 5))) {
-                schedule[i][j]['overlap'] = 'L';
-                schedule[i][j + 1]['overlap'] = 'R';
-              }
-            }
-            else {
-              schedule[i][j + 1]['overlap'] = '';
-            }
-          }
-        }
-      }
-      */
-
       DayElements = [];
       DayElements.push(document.getElementById("tablediv-mon"));
       DayElements.push(document.getElementById("tablediv-tue"));
@@ -273,14 +240,25 @@ return 0;
           div.style.opacity = 0.8;
           div.addEventListener("click",clickHandler,false);
 
-          function clickHandler(e){
-           var addSuccess = $ionicPopup.alert({
-            title: 'Course Info',
-             template: 'Name'+ schedule[i][j]["courseName"] + '\nPlace:'
-             + schedule[i][j]["room"] 
 
+/********************** on click ********************/
+          function clickHandler(e){
+            var csName = schedule[i][j];
+            console.log('i = ' + i);
+            console.log('j=' + j);
+
+            var classinfo = 'Name'+ csName + '\nPlace:';
+           var addSuccess = $ionicPopup.alert({
+            template: csName,
+            title:'Course Info',
+            okText:'Gotcha!'
+            //title: 'Course Info',
+            //template: 'Name'+ schedule[i][j]["courseName"] + '\nPlace:'
+            // + schedule[i][j]["room"]
            });
          }
+/********************** on click done ******************/
+
 
          if (schedule[i][j]['overlap'] == 'y') {
           var width = 11 / schedule[i][j]['count'];
