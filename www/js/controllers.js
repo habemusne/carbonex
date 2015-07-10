@@ -238,12 +238,13 @@ return 0;
           div.style.marginTop = frameStartY.toString() + 'px';
           div.style.position = 'absolute';
           div.style.opacity = 0.8;
+          div.course = schedule[i][j];
           div.addEventListener("click",clickHandler,false);
 
 
 /********************** on click ********************/
           function clickHandler(e){
-            var csName = schedule[i][j];
+            var csName = e.target.course;
             console.log('i = ' + i);
             console.log('j=' + j);
 
