@@ -239,25 +239,19 @@ return 0;
           div.style.position = 'absolute';
           div.style.opacity = 0.8;
           div.course = schedule[i][j];
-          div.addEventListener("click",clickHandler,false);
-
+          div.addEventListener('click',clickHandler,false);
 
 /********************** on click ********************/
           function clickHandler(e){
             var csName = e.target.course;
-            console.log('i = ' + i);
-            console.log('j=' + j);
 
-            var classinfo = 'Name'+ csName + '\nPlace:';
-           var addSuccess = $ionicPopup.alert({
-            template: csName,
+            var addSuccess = $ionicPopup.alert({
             title:'Course Info',
+            template: 'Name: '+ csName["courseName"] 
+                + ' Place: ' + csName["room"],
             okText:'Gotcha!'
-            //title: 'Course Info',
-            //template: 'Name'+ schedule[i][j]["courseName"] + '\nPlace:'
-            // + schedule[i][j]["room"]
            });
-         }
+         } 
 /********************** on click done ******************/
 
 
@@ -524,14 +518,18 @@ $scope.$on('event:auth-logout-complete', function() {
           div.style.opacity = 0.8;
           div.addEventListener("click",clickHandler,false);
 
+/********************** on click ********************/
           function clickHandler(e){
-           var addSuccess = $ionicPopup.alert({
-            title: 'Course Info',
-             template: 'Name'+ schedule[i][j]["courseName"] + '\nPlace:'
-             + schedule[i][j]["room"] 
+            var csName = e.target.course;
 
-           });
-         }
+            var addSuccess = $ionicPopup.alert({
+              title:'Course Info',
+              template: 'Name: '+ csName["courseName"] 
+                  + ' Place: ' + csName["room"],
+              okText:'Gotcha!'
+            });
+         } 
+/********************** on click done ******************/ 
 
          if (schedule[i][j]['overlap'] == 'y') {
           var width = 11 / schedule[i][j]['count'];
