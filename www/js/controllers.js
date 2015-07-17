@@ -239,20 +239,22 @@ return 0;
           div.style.position = 'absolute';
           div.style.opacity = 0.8;
           div.course = schedule[i][j];
+          div.i = i;
+          div.j = j;
           div.addEventListener("click",clickHandler,false);
 
 
 /********************** on click ********************/
           function clickHandler(e){
             var csName = e.target.course;
-            console.log('i = ' + i);
-            console.log('j=' + j);
+            console.log('i = ' + e.target.i);
+            console.log('j=' + e.target.j);
+            console.log('className = ' + csName);
 
-            var classinfo = 'Name'+ csName + '\nPlace:';
+            var classinfo = 'Name'+ csName["courseName"]+ 'Place:'+csName["room"];
            var addSuccess = $ionicPopup.alert({
-            template: csName,
+            template: classinfo,
             title:'Course Info',
-            okText:'Gotcha!'
             //title: 'Course Info',
             //template: 'Name'+ schedule[i][j]["courseName"] + '\nPlace:'
             // + schedule[i][j]["room"]
