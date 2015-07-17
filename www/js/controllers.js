@@ -239,27 +239,18 @@ return 0;
           div.style.position = 'absolute';
           div.style.opacity = 0.8;
           div.course = schedule[i][j];
-          div.i = i;
-          div.j = j;
-          div.addEventListener("click",clickHandler,false);
-
+          div.addEventListener('click',clickHandler,false);
 
 /********************** on click ********************/
           function clickHandler(e){
             var csName = e.target.course;
-            console.log('i = ' + e.target.i);
-            console.log('j=' + e.target.j);
-            console.log('className = ' + csName);
-
-            var classinfo = 'Name'+ csName["courseName"]+ 'Place:'+csName["room"];
-           var addSuccess = $ionicPopup.alert({
-            template: classinfo,
+            var addSuccess = $ionicPopup.alert({
             title:'Course Info',
-            //title: 'Course Info',
-            //template: 'Name'+ schedule[i][j]["courseName"] + '\nPlace:'
-            // + schedule[i][j]["room"]
+            template: 'Name: '+ csName["courseName"] 
+                + ' Place: ' + csName["room"],
+            okText:'Gotcha!'
            });
-         }
+         } 
 /********************** on click done ******************/
 
 
@@ -526,14 +517,18 @@ $scope.$on('event:auth-logout-complete', function() {
           div.style.opacity = 0.8;
           div.addEventListener("click",clickHandler,false);
 
+/********************** on click ********************/
           function clickHandler(e){
-           var addSuccess = $ionicPopup.alert({
-            title: 'Course Info',
-             template: 'Name'+ schedule[i][j]["courseName"] + '\nPlace:'
-             + schedule[i][j]["room"] 
+            var csName = e.target.course;
 
-           });
-         }
+            var addSuccess = $ionicPopup.alert({
+              title:'Course Info',
+              template: 'Name: '+ csName["courseName"] 
+                  + ' Place: ' + csName["room"],
+              okText:'Gotcha!'
+            });
+         } 
+/********************** on click done ******************/ 
 
          if (schedule[i][j]['overlap'] == 'y') {
           var width = 11 / schedule[i][j]['count'];
